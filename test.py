@@ -1,36 +1,6 @@
 from nn_square_scripting import *
 
 
-def output_to_file(output_file, spect_to_sample, batch_x, batch_y, my_y_from_nn, my_cost_per_batch, x_std, x_mean,
-                   y_std,
-                   y_mean, spect_type="pred"):
-    if spect_type not in ["test", "compare", "val", "pred"]:
-        raise ValueError("Invalid file_type. Supported values are 'test', 'compare', and 'val'.")
-    spect_prefix = {
-        "test": "test_out_file_",
-        "compare": "compare_test_out_file_",
-        "val": "val_test_out_file_",
-        "pred": "val_test_out_file_"
-    }
-    filename = output_file + "/" + spect_prefix[spect_type] + str(spect_to_sample) + ".txt"
-
-    f = open(filename, 'w')
-    f.write("XValue\nPredicted\n")
-    xvals = batch_x[0] * x_std + x_mean
-    for i in list(xvals):
-        f.write(str(i) + ",")
-    f.write("\n")
-    for item in list(my_y_from_nn[0] * y_std + y_mean):
-        f.write(str(item) + ",")
-    f.flush()
-    f.write("\n")
-    f.flush()
-    f.close()
-    print("Cost: ", my_cost_per_batch)
-    print(my_y_from_nn)
-    print("Wrote to: " + str(filename))
-
-
 def reading_data_foward(data_file):
     x_file = data_file + 'geometry_for_square_prediction.csv'  # file that contain parameter combination you want to try
 
