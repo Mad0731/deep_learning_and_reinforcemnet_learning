@@ -1,4 +1,4 @@
-from core_of_my_own_square_scripting import *
+from nn_square_scripting import *
 
 
 def output_to_file(output_file, spect_to_sample, batch_x, batch_y, my_y_from_nn, my_cost_per_batch, x_std, x_mean,
